@@ -1,0 +1,103 @@
+{
+ "duration": 14.025,
+ "segments": [
+  {
+   "start": 0.12,
+   "end": 0.86,
+   "dur": 0.74,
+   "text": "Why are you late?",
+   "f0_median": 250.0,
+   "f0_p10": 216.2,
+   "f0_p90": 280.7,
+   "voiced_frac": 0.72,
+   "peak_db": 0.7
+  },
+  {
+   "start": 1.13,
+   "end": 2.66,
+   "dur": 1.53,
+   "text": "Because of the sign outside, sir.",
+   "f0_median": 225.4,
+   "f0_p10": 186.9,
+   "f0_p90": 266.7,
+   "voiced_frac": 0.75,
+   "peak_db": 0.4
+  },
+  {
+   "start": 2.86,
+   "end": 11.08,
+   "dur": 8.22,
+   "text": "What sign? School zone, go slow. I was just following the rules, sir.",
+   "f0_median": 333.3,
+   "f0_p10": 166.7,
+   "f0_p90": 615.4,
+   "voiced_frac": 0.64,
+   "peak_db": 6.6
+  }
+ ],
+ "full_transcript": [
+  {
+   "start": 0.0,
+   "end": 14.02,
+   "text": "Why are you late? Because of the sign outside, sir. What sign? School zone, go slow. I was just following the rules, sir."
+  }
+ ],
+ "onsets": [
+  0.19,
+  0.39,
+  0.62,
+  0.83,
+  1.17,
+  1.29,
+  1.45,
+  1.56,
+  1.71,
+  1.93,
+  2.15,
+  2.45,
+  2.89,
+  2.93,
+  3.15,
+  3.64,
+  3.72,
+  3.98,
+  4.1,
+  4.42,
+  4.6,
+  4.78,
+  4.88,
+  5.22,
+  6.52,
+  6.67,
+  6.84,
+  7.02,
+  7.2,
+  7.36,
+  7.55,
+  7.75,
+  7.86,
+  7.93,
+  8.04,
+  8.29,
+  8.4,
+  8.55,
+  8.68,
+  8.87,
+  9.15,
+  9.27,
+  9.43,
+  9.61,
+  10.03,
+  10.39,
+  10.56,
+  10.63
+ ],
+ "gap_levels_db_rel": [
+  -68.9,
+  -70.8
+ ],
+ "speech_time": 10.49,
+ "centroid_median": 1533.9053036541354,
+ "flatness_median": 0.012147512286901474,
+ "ebur128": "Summary:\n\n  Integrated loudness:\n    I:         -15.9 LUFS\n    Threshold: -26.3 LUFS\n\n  Loudness range:\n    LRA:         3.2 LU\n    Threshold: -36.9 LUFS\n    LRA low:   -18.5 LUFS\n    LRA high:  -15.3 LUFS\n\n  True peak:\n    Peak:        0.0 dBFS\n"
+}
