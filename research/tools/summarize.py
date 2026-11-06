@@ -8,7 +8,7 @@ import sys
 import numpy as np
 
 wd = sys.argv[1]
-NATIVE_FPS = {"v1": 24, "v2": 30, "v3": 30, "v4": 24, "v5": 30, "v6": 24}
+NATIVE_FPS = {"b1": 30, "b2": 24, "b3": 30, "b4": 30, "b5": 30, "b6": 24, "b7": 30, "b8": 30, "v1": 24, "v2": 30, "v3": 30, "v4": 24, "v5": 30, "v6": 24}
 out = {}
 
 

@@ -1,0 +1,29 @@
+{
+ "chunks": [
+  {
+   "start": 0.0,
+   "end": 6.0,
+   "text": "Okay, love of his life. Give him another-"
+  },
+  {
+   "start": 6.0,
+   "end": 14.78,
+   "text": "Okay, okay"
+  },
+  {
+   "start": 14.78,
+   "end": 22.0,
+   "text": "I know how old he is! I made him! Okay? This is for character development! I know what I'm doing!"
+  },
+  {
+   "start": 22.0,
+   "end": 28.58,
+   "text": "I'm doing this because I love them. I love him Send in the toxic"
+  }
+ ],
+ "level_p10_dbfs": -58.8,
+ "level_p50_dbfs": -24.3,
+ "level_p95_dbfs": -17.7,
+ "bed_below_speech_db": 41.1,
+ "silent_frac": 0.089
+}

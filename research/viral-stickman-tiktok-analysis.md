@@ -2,7 +2,9 @@
 
 A study of the six stickman comedy videos supplied for the `@berry889888` request. It covers script, hook, edit, camera, animation, lighting, colour, captions and sound, and what makes people rewatch.
 
-> **Scope note.** `www.tiktok.com` was blocked by this session's network policy (HTTP 403 at the proxy), so I could not open the `@berry889888` profile or see view counts. Everything below comes from the six attached MP4s. The six files carry watermarks from three other accounts (`@laughstickman`, `@stickman.studio78`, `@stickmanfun804`). If they came from `@berry889888`, that page re-uploads other creators' skits.
+> **Scope note.** This report covers the **six attached MP4s**. The six files carry watermarks from three stickman channels (`@laughstickman`, `@stickman.studio78`, `@stickmanfun804`), not `@berry889888`.
+>
+> **The `@berry889888` profile itself** (43 videos, top 8 analysed frame by frame) is covered in **[berry889888/berry889888-analysis.md](berry889888/berry889888-analysis.md)**. Its style is quite different: 60–90 s "When God Created [Zodiac Sign]" dialogues. That report ends with a side-by-side comparison of the two styles.
 
 ---
 
@@ -508,7 +510,7 @@ TWIST:    <PUNCH — setup words ... PUNCH WORD>.
 
 ## 13. Limitations
 
-- I could not open `tiktok.com/@berry889888` (blocked by network policy), so I can't say which of the account's videos are the *most* viral, or what their captions, hashtags, view counts or comments are.
+- This report covers the six attached files. The `@berry889888` account's own top videos are analysed separately in `berry889888/berry889888-analysis.md`.
 - The transcripts are machine (Whisper small.en) cross-checked against the burned-in captions where present. V2 and V5 have no captions, so their text is ASR only (it read cleanly).
 - Pitch values come from an autocorrelation tracker and may be off by an octave on shouted or laughing lines. Treat them as relative.
 - I can't listen to audio. Voice character and SFX identities are inferred from spectra, loudness and ASR tags (e.g. "*HORN*", "[LAUGHTER]").

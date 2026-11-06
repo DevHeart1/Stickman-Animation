@@ -1,0 +1,49 @@
+{
+ "chunks": [
+  {
+   "start": 0.0,
+   "end": 7.45,
+   "text": "Alright, next is Scorpio. Make them passionate. K, how much? They don't just feel things."
+  },
+  {
+   "start": 7.45,
+   "end": 16.15,
+   "text": "They go all in. That's perfect. Now make them intense. About what they're passionate about. Especially as well as everything else."
+  },
+  {
+   "start": 16.15,
+   "end": 24.11,
+   "text": "So what would that intense passion look like to others? Like signing a waiver just to say you love them. Enough said. Give them trust. Okay, how much?"
+  },
+  {
+   "start": 24.11,
+   "end": 31.58,
+   "text": "Enough to trust their instincts about not trusting anyone. Trustation. Now make them the type that'll mind their business."
+  },
+  {
+   "start": 31.58,
+   "end": 39.42,
+   "text": "and still get attention. So like, unreadable? More like a book with a lock on it. So how will one get them to open up?"
+  },
+  {
+   "start": 39.42,
+   "end": 46.79,
+   "text": "You earn each chapter. Case or private? They will also be goal oriented. How do you like how?"
+  },
+  {
+   "start": 46.79,
+   "end": 54.71,
+   "text": "They don't chase goals. They corner them. So what if the goal is like unrealistic? Then they'll adjust reality."
+  },
+  {
+   "start": 54.71,
+   "end": 62.53,
+   "text": "And let them hold grudges. Hey, but how long? Long enough to forget what they were mad about. That's extreme. That's Scorpio."
+  }
+ ],
+ "level_p10_dbfs": -35.2,
+ "level_p50_dbfs": -29.6,
+ "level_p95_dbfs": -20.1,
+ "bed_below_speech_db": 15.1,
+ "silent_frac": 0.006
+}

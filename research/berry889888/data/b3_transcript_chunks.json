@@ -1,0 +1,49 @@
+{
+ "chunks": [
+  {
+   "start": 0.0,
+   "end": 7.15,
+   "text": "All right, next is cancer. First, give them emotions. Okay, how much? A lot."
+  },
+  {
+   "start": 7.15,
+   "end": 14.42,
+   "text": "Gotcha. Now double it. Now multiply it by everybody in the room. That won't be too much."
+  },
+  {
+   "start": 14.42,
+   "end": 24.06,
+   "text": "They'll feel everyone's emotions, but confuse their own. So what do they do? They'll hold it all in and tell everyone they're fine. So what do they get out of this?"
+  },
+  {
+   "start": 24.06,
+   "end": 30.44,
+   "text": "Intuition. Now make them nurturing. Gotcha. They'll always make sure everyone else is okay."
+  },
+  {
+   "start": 30.44,
+   "end": 36.56,
+   "text": "What about themselves? They'll get to that later. Also, make them extremely sensitive."
+  },
+  {
+   "start": 36.56,
+   "end": 46.54,
+   "text": "Okay, like how? The tone in a... Hey. That's nothing. To you. To them? They think you hate them now. That's extreme. Make them emotionally aware."
+  },
+  {
+   "start": 46.54,
+   "end": 54.29,
+   "text": "of themselves? of everyone okay okay"
+  },
+  {
+   "start": 54.29,
+   "end": 60.55,
+   "text": "They'll analyze it. It's kind of sweet. They'll take it personal. That's exhausting. That's cancer."
+  }
+ ],
+ "level_p10_dbfs": -41.4,
+ "level_p50_dbfs": -31.5,
+ "level_p95_dbfs": -19.0,
+ "bed_below_speech_db": 22.4,
+ "silent_frac": 0.006
+}
