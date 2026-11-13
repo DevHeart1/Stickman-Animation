@@ -1,0 +1,954 @@
+<title>Twelve Minutes Ahead Style Bible</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a night-shift control-room log. One column of "monitors" (live frames) with mono annotations, like an operator's case file. */
+:root {
+  --ink: #06080b;
+  --panel: #0d1218;
+  --line: #1f2833;
+  --paper: #e9e5dc;
+  --muted: #8a94a0;
+  --monitor: #5fd3e6;
+  --sodium: #f2a73b;
+  --alarm: #ff4040;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 80px;
+  display: grid;
+  gap: 72px;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(56px, 11vw, 132px); font-weight: 900; }
+h1 .ahead { color: var(--sodium); }
+h2 { font-size: clamp(34px, 5vw, 52px); }
+h3 { font-size: 26px; }
+p { margin: 0; max-width: 66ch; }
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.label b { color: var(--sodium); font-weight: 500; }
+.label .rec { color: var(--alarm); }
+section { display: grid; gap: 22px; }
+.head { display: grid; gap: 10px; }
+.lede { color: var(--muted); }
+canvas { display: block; width: 100%; height: auto; max-width: 100%; background: #000; }
+.frame { display: grid; gap: 10px; margin: 0; }
+.frame canvas { border: 1px solid var(--line); }
+.frame figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.frame figcaption span:first-child { color: var(--paper); }
+
+.hero { display: grid; gap: 18px; }
+.hero .meta { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.tagline { font-size: clamp(18px, 2.2vw, 22px); max-width: 52ch; }
+
+.specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.specs div { background: var(--panel); padding: 14px 16px; display: grid; gap: 2px; min-width: 0; }
+.specs strong { font-family: var(--mono); font-weight: 500; font-size: 17px; font-variant-numeric: tabular-nums; }
+
+.cast { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.card { display: grid; gap: 10px; align-content: start; min-width: 0; }
+.card canvas { border: 1px solid var(--line); }
+.card p { font-size: 14.5px; color: var(--muted); }
+.card .tag { font-family: var(--mono); font-size: 12px; color: var(--sodium); }
+
+.palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.chip { display: grid; gap: 6px; font-size: 13.5px; min-width: 0; }
+.chip i { display: block; height: 64px; border: 1px solid var(--line); }
+.chip code { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+.script-scroll { overflow-x: auto; }
+.colorscript { display: grid; grid-template-columns: repeat(11, minmax(84px, 1fr)); gap: 4px; min-width: 960px; }
+.cs { display: grid; grid-template-rows: 150px auto; gap: 8px; }
+.cs i { display: block; border: 1px solid var(--line); }
+.cs span { font-family: var(--mono); font-size: 11px; color: var(--muted); line-height: 1.35; }
+.cs span b { display: block; color: var(--paper); font-weight: 500; }
+
+.chart-box { overflow-x: auto; border: 1px solid var(--line); background: var(--panel); }
+.chart-box svg { display: block; min-width: 720px; width: 100%; height: auto; }
+
+.rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.rules div { background: var(--panel); padding: 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.rules h3 { font-size: 22px; color: var(--monitor); }
+.rules p { font-size: 14.5px; color: var(--muted); }
+
+.script { display: grid; gap: 28px; }
+.beat { display: grid; grid-template-columns: 150px 1fr; gap: 6px 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+.beat .where { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+.beat .where b { display: block; color: var(--sodium); font-weight: 500; }
+.lines { display: grid; gap: 8px; min-width: 0; }
+.line { display: grid; grid-template-columns: 110px 1fr; gap: 14px; }
+.who { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; padding-top: 3px; color: var(--muted); }
+.who.d { color: var(--paper); }
+.who.a { color: var(--sodium); }
+.who.s { color: var(--monitor); }
+.who.f { color: var(--alarm); }
+.dir { font-style: italic; color: var(--muted); font-size: 14.5px; }
+.why { font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--line); padding-left: 12px; margin-top: 6px; }
+
+.sound { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.sound div { display: grid; gap: 6px; align-content: start; }
+.sound h3 { font-size: 21px; }
+.sound p { font-size: 14.5px; color: var(--muted); }
+
+.next { border: 1px solid var(--sodium); padding: 22px; display: grid; gap: 12px; }
+.next ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 70ch; }
+
+@media (max-width: 640px) {
+  .beat { grid-template-columns: 1fr; }
+  .line { grid-template-columns: 1fr; gap: 0; }
+}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="label">Style bible · Episode 01 · <span class="rec">● Rec</span> look development</div>
+    <h1>Twelve minutes <span class="ahead">ahead</span></h1>
+    <p class="tagline">What if you could see twelve minutes into the future, but every time you tried to save someone, somebody else died?</p>
+    <div class="meta label"><span>Sci-fi thriller</span><span>10–12 min</span><span>16:9 YouTube</span><span>Stick-figure noir</span></div>
+  </header>
+
+  <figure class="frame">
+    <canvas id="hero" width="1280" height="720" aria-label="Animated key frame: Daniel in the traffic control room at 11:48 PM, staring at a monitor showing the bus crash stamped 12:00 AM."></canvas>
+    <figcaption><span>KEY FRAME A · Scene 01 · Control room, 11:48 PM</span><span>Slow push-in · red alarm light pulses on Daniel · narration subtitle style</span></figcaption>
+  </figure>
+
+  <section>
+    <div class="head">
+      <div class="label">01 · The look</div>
+      <h2>Stick-figure noir</h2>
+      <p class="lede">Simple characters, cinematic world. The figures stay flat and readable: round paper-white heads, thick outlined limbs, big expressive eyes. Everything around them is lit like a thriller. Monitor glow, sodium streetlights and alarm red do the emotional work, so a simple face can carry real dread.</p>
+    </div>
+    <div class="specs">
+      <div><span class="label">Canvas</span><strong>1920 × 1080</strong></div>
+      <div><span class="label">Frame rate</span><strong>24 fps, on twos</strong></div>
+      <div><span class="label">Letterbox</span><strong>2.39:1 bars on peaks</strong></div>
+      <div><span class="label">Line</span><strong>Ink outline 10px</strong></div>
+      <div><span class="label">Grain</span><strong>6% always on</strong></div>
+      <div><span class="label">Subtitles</span><strong>Plex Sans 34px</strong></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">02 · Cast</div>
+      <h2>Three faces and a voice</h2>
+      <p class="lede">Each character reads from silhouette alone, so a frozen thumbnail still tells you who is on screen.</p>
+    </div>
+    <div class="cast">
+      <div class="card">
+        <canvas id="c-daniel" width="480" height="560" aria-label="Daniel character design"></canvas>
+        <h3>Daniel</h3>
+        <div class="tag">Night operator · 11 years · widower</div>
+        <p>Messy hair, permanent eye bags, stubble that gets heavier as the loops pile up. Lanyard badge he never takes off. Hunched forward, always leaning toward a screen.</p>
+      </div>
+      <div class="card">
+        <canvas id="c-ada" width="480" height="560" aria-label="Ada character design"></canvas>
+        <h3>Ada</h3>
+        <div class="tag">Daughter · 16 · on Bus 26</div>
+        <p>High ponytail, backpack strap, upright posture. Mostly heard on the phone, so her voice and one warm colour (sodium amber) carry her until we finally see her in Scene 11.</p>
+      </div>
+      <div class="card">
+        <canvas id="c-driver" width="480" height="560" aria-label="Bus driver character design"></canvas>
+        <h3>Bus Driver</h3>
+        <div class="tag">Bus 26 · radio voice</div>
+        <p>Flat navy cap and a moustache. Seen small inside CCTV frames and once in a radio close-up. Calm, procedural, a counterweight to Daniel's panic.</p>
+      </div>
+      <div class="card">
+        <canvas id="c-system" width="480" height="560" aria-label="CityWatch system visual"></canvas>
+        <h3>CityWatch</h3>
+        <div class="tag">The system · never a body</div>
+        <p>A thin cyan ring with a live waveform. It only appears on screens and speaks in short, flat sentences. Viewers should never be sure if it is cruel or just literal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">03 · Expression sheet</div>
+      <h2>Daniel's six faces</h2>
+      <p class="lede">The whole film is played on these. Brows and pupils do most of the acting; the mouth stays small until the big moments.</p>
+    </div>
+    <canvas id="expr" width="1200" height="300" aria-label="Six Daniel expressions: watching, fear, dread, resolve, grief, relief"></canvas>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">04 · Future footage</div>
+      <h2>CCTV language</h2>
+      <p class="lede">Every "future" recording uses this treatment: drained green, heavy noise, hard HUD text. The timestamp is the scariest thing on screen, so it always sits in amber in the same corner.</p>
+    </div>
+    <figure class="frame">
+      <canvas id="cctv" width="1280" height="720" aria-label="Animated CCTV footage of the bus crash on the eastern bridge, stamped 00:00 AM"></canvas>
+      <figcaption><span>KEY FRAME B · Scene 01/03 · Eastern bridge, camera 14</span><span>Steel beam slides → bus swerves → guardrail breaks → signal lost</span></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">05 · The reset</div>
+      <h2>Midnight, again</h2>
+      <p class="lede">The loop has one fixed grammar, used every time: three ticks, a freeze, a slice glitch, a white-out, silence, then 11:48 and the same coffee cup. Repetition is the horror, so it never changes.</p>
+    </div>
+    <figure class="frame">
+      <canvas id="reset" width="1280" height="720" aria-label="Animated loop reset: clock reaches 11:59:59, glitches to white, returns to 11:48:00"></canvas>
+      <figcaption><span>KEY FRAME C · Scene 05 · The reset</span><span>Extreme close-up · camera punch on each tick · counter increments</span></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">06 · Light and colour</div>
+      <h2>Four lights, one meaning each</h2>
+      <p class="lede">No colour is decorative. When one appears, the audience learns what it means and we never break that rule.</p>
+    </div>
+    <div class="palette">
+      <div class="chip"><i style="background:#06080b"></i><b>Night ink</b><code>#06080B · the room, the unknown</code></div>
+      <div class="chip"><i style="background:#5fd3e6"></i><b>Monitor cyan</b><code>#5FD3E6 · watching, control, CityWatch</code></div>
+      <div class="chip"><i style="background:#ff4040"></i><b>Alarm red</b><code>#FF4040 · a future death</code></div>
+      <div class="chip"><i style="background:#f2a73b"></i><b>Sodium amber</b><code>#F2A73B · time, Ada, real life</code></div>
+      <div class="chip"><i style="background:#e9e5dc"></i><b>Paper</b><code>#E9E5DC · characters</code></div>
+    </div>
+    <div class="label">Colour script, scene by scene</div>
+    <div class="script-scroll"><div class="colorscript" id="colorscript"></div></div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">07 · Intensity map</div>
+      <h2>Never a flat minute</h2>
+      <p class="lede">Tension on a 0–10 scale across the 11 scenes. We spike in the first 45 seconds to hook the viewer, then build in waves. Each drop is short and gives us room for the next spike. The quietest moment (Scene 08) sits right before the biggest decision.</p>
+    </div>
+    <div class="chart-box">
+      <svg id="tension" viewBox="0 0 1000 320" role="img" aria-label="Tension curve across scenes 1 to 11"></svg>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">08 · Motion rules</div>
+      <h2>How the camera behaves</h2>
+    </div>
+    <div class="rules">
+      <div><h3>Hold before the reveal</h3><p>Every timestamp, every new recording, every SYSTEM line gets 12 frames of stillness first. The pause is where viewers lean in.</p></div>
+      <div><h3>Smash cut on numbers</h3><p>11:48 → 12:00 cuts are instant, with a one-frame white flash and a hard audio stop. No dissolves anywhere in the loop.</p></div>
+      <div><h3>Shake only on impact</h3><p>Camera shake is reserved for crashes and Daniel hitting the door. If it shook earlier, it would mean nothing when it counts.</p></div>
+      <div><h3>Repeat exact frames</h3><p>Loop openings reuse the identical drawings and timing. Viewers start spotting the one detail that changes each time.</p></div>
+      <div><h3>Push in as the walls close</h3><p>Control-room shots drift in slowly through Scenes 3 to 7. The room literally gets smaller around him.</p></div>
+      <div><h3>Pull out to let go</h3><p>The only wide pull-back in the film is the last shot, when Daniel stops controlling the frame.</p></div>
+    </div>
+  </section>
+
+  <figure class="frame">
+    <canvas id="ending" width="1280" height="720" aria-label="Animated ending: Daniel and Ada walk home under amber streetlights"></canvas>
+    <figcaption><span>KEY FRAME D · Scene 11 · Outside, 12:12 AM</span><span>First warm frame of the film · walk cycle on twos · CityWatch window behind them</span></figcaption>
+  </figure>
+
+  <section>
+    <div class="head">
+      <div class="label">09 · Dialogue voice</div>
+      <h2>How they talk</h2>
+      <p class="lede">Short lines, subtext over exposition. Ada jokes to get past her dad's fear. Daniel answers questions with questions. CityWatch only says what is literally true. A sample pass on three moments:</p>
+    </div>
+    <div class="script">
+      <div class="beat">
+        <div class="where"><b>Scene 02</b>Phone · 11:48 PM</div>
+        <div class="lines">
+          <div class="line"><span class="who a">ADA</span><span>You're watching my bus again.</span></div>
+          <div class="line"><span class="who d">DANIEL</span><span>I'm watching traffic.</span></div>
+          <div class="line"><span class="who a">ADA</span><span>Funny how the traffic always has my seat number.</span></div>
+          <div class="line"><span class="who d">DANIEL</span><span>How far from the bridge?</span></div>
+          <div class="line"><span class="who a">ADA</span><span>Fifteen minutes. Dad, I'll be fine.</span></div>
+          <div class="line"><span class="dir">She hangs up. On the desk, the photo of his wife. He turns it face-down. Then turns it back.</span></div>
+          <p class="why">"I'll be fine" is the last thing his wife said. Ada doesn't know that. The audience will by the end of the scene.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <div class="where"><b>Scene 04</b>Hallway recording · 11:57 PM</div>
+        <div class="lines">
+          <div class="line"><span class="dir">The new feed shows the corridor outside. Daniel, bleeding, slamming the security door.</span></div>
+          <div class="line"><span class="who f">FUTURE DANIEL</span><span>Stop changing it! Every time you touch it, it learns!</span></div>
+          <div class="line"><span class="who d">DANIEL</span><span>(whispering) Learns what?</span></div>
+          <div class="line"><span class="dir">The feed cuts. The clock ticks to 11:58.</span></div>
+          <p class="why">"It learns" plants the reveal three scenes early without explaining it.</p>
+        </div>
+      </div>
+      <div class="beat">
+        <div class="where"><b>Scene 07</b>The control room speakers</div>
+        <div class="lines">
+          <div class="line"><span class="who d">DANIEL</span><span>How long have I been in here?</span></div>
+          <div class="line"><span class="who s">CITYWATCH</span><span>For you: four years, two months.</span></div>
+          <div class="line"><span class="who d">DANIEL</span><span>And for everyone else?</span></div>
+          <div class="line"><span class="who s">CITYWATCH</span><span>Fifty-four seconds.</span></div>
+          <div class="line"><span class="who d">DANIEL</span><span>Then show me one where she's safe.</span></div>
+          <div class="line"><span class="who s">CITYWATCH</span><span>Define safe.</span></div>
+          <div class="line"><span class="dir">Daniel opens his mouth. Nothing comes out. Hold four seconds of silence.</span></div>
+          <p class="why">The machine's flat question is the thesis of the film. Daniel can't answer it, and that silence is the turning point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <div class="label">10 · Sound</div>
+      <h2>Half the fear is audio</h2>
+    </div>
+    <div class="sound">
+      <div><h3>The tick</h3><p>One wall clock, recorded dry. It runs under every control-room scene and speeds up 3% each loop. It stops dead at every reset.</p></div>
+      <div><h3>The hum</h3><p>Fluorescent 50 Hz drone and server fans. Always there, so the moments it cuts out feel like the world holding its breath.</p></div>
+      <div><h3>Radio grit</h3><p>Band-limited, clipped dispatch chatter for the driver and patrol. Ada's phone voice is cleaner and warmer, the only soft sound in the room.</p></div>
+      <div><h3>Future playback</h3><p>CCTV audio is pitched down slightly, with tape wobble. When a crash hits, the audio drops out one frame before the picture does.</p></div>
+      <div><h3>Score</h3><p>Pulsing low synth on a 112 bpm heartbeat that climbs each loop. No melody until Scene 08, when a single piano line enters for Ada.</p></div>
+      <div><h3>Silence</h3><p>Used three times: after the reset, after "Define safe," and the moment Daniel presses Confirm.</p></div>
+    </div>
+  </section>
+
+  <section class="next">
+    <div class="label"><b>Next, once this look is approved</b></div>
+    <ol>
+      <li>Lock the character rigs (Daniel, Ada, Driver) and the four environments: control room, eastern bridge, hallway, street.</li>
+      <li>Finish the dialogue and narration pass on all 11 scenes in the voice shown above.</li>
+      <li>Board every shot with timing, camera and action, then animate scene by scene, starting with the 45-second cold open as a test.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+(() => {
+  const INK = '#07080b', PAPER = '#ece8df', PAPER_BACK = '#bdb9b0';
+  const CYAN = '#5fd3e6', AMBER = '#f2a73b', RED = '#ff4040';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const TAU = Math.PI * 2;
+
+  // seeded random
+  function rng(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+
+  // film grain tile
+  const grain = document.createElement('canvas');
+  grain.width = grain.height = 256;
+  (() => {
+    const g = grain.getContext('2d'), d = g.createImageData(256, 256), r = rng(7);
+    for (let i = 0; i < d.data.length; i += 4) { const v = r() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    g.putImageData(d, 0, 0);
+  })();
+  function addGrain(ctx, w, h, a, t) {
+    ctx.save(); ctx.globalAlpha = a; ctx.globalCompositeOperation = 'overlay';
+    const ox = Math.floor((t * 977) % 256), oy = Math.floor((t * 613) % 256);
+    ctx.translate(-ox, -oy);
+    for (let x = 0; x < w + 256; x += 256) for (let y = 0; y < h + 256; y += 256) ctx.drawImage(grain, x, y);
+    ctx.restore();
+  }
+  function vignette(ctx, w, h, a) {
+    const g = ctx.createRadialGradient(w / 2, h / 2, h * 0.35, w / 2, h / 2, h * 0.95);
+    g.addColorStop(0, 'rgba(0,0,0,0)'); g.addColorStop(1, `rgba(0,0,0,${a})`);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  }
+  function glow(ctx, x, y, r, color, a, mode = 'screen') {
+    ctx.save(); ctx.globalCompositeOperation = mode;
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, hexA(color, a)); g.addColorStop(1, hexA(color, 0));
+    ctx.fillStyle = g; ctx.fillRect(x - r, y - r, r * 2, r * 2); ctx.restore();
+  }
+  function hexA(hex, a) { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+  function letterbox(ctx, w, h, bar) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, w, bar); ctx.fillRect(0, h - bar, w, bar); }
+  function subtitle(ctx, w, y, who, text, whoColor) {
+    ctx.save(); ctx.textAlign = 'center';
+    ctx.font = '500 30px "IBM Plex Sans", Arial, sans-serif';
+    const tw = ctx.measureText(text).width;
+    ctx.fillStyle = 'rgba(0,0,0,0.55)'; ctx.fillRect(w / 2 - tw / 2 - 18, y - 32, tw + 36, 46);
+    ctx.fillStyle = '#f3f0e8'; ctx.fillText(text, w / 2, y);
+    if (who) { ctx.font = '500 14px "IBM Plex Mono", monospace'; ctx.fillStyle = whoColor || AMBER; ctx.fillText(who, w / 2, y - 44); }
+    ctx.restore();
+  }
+  const pad = n => String(n).padStart(2, '0');
+
+  // ---------- characters ----------
+  const seg = (p, len, ang) => [p[0] + Math.sin(ang) * len, p[1] + Math.cos(ang) * len];
+  function limb(ctx, pts, s, col) {
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.strokeStyle = INK; ctx.lineWidth = 11 * s; ctx.stroke();
+    ctx.strokeStyle = col; ctx.lineWidth = 5.5 * s; ctx.stroke();
+  }
+  const POSE = { torso: 0, lt: 0.12, ls: 0, rt: -0.12, rs: 0, lu: 0.22, lf: 0.08, ru: -0.22, rf: -0.08 };
+  // o: {x,y (hip), s, f (facing 1/-1), pose, expr, who, look, t, blink}
+  function figure(ctx, o) {
+    const s = o.s, f = o.f || 1, p = Object.assign({}, POSE, o.pose || {});
+    const kid = o.who === 'ada';
+    const L = kid ? 0.86 : 1;
+    const hip = [o.x, o.y];
+    const sh = seg(hip, 56 * s * L, Math.PI + p.torso * f);
+    const neck = seg(hip, 64 * s * L, Math.PI + p.torso * f);
+    const hr = (kid ? 30 : 31) * s;
+    const head = seg(hip, 64 * s * L + hr + 2 * s, Math.PI + p.torso * f + (o.headTilt || 0) * f);
+    const leg = (a, b) => { const k = seg(hip, 38 * s * L, a * f); return [hip, k, seg(k, 38 * s * L, (a + b) * f)]; };
+    const arm = (a, b) => { const e = seg(sh, 30 * s * L, a * f); return [sh, e, seg(e, 30 * s * L, (a + b) * f)]; };
+    const backLeg = leg(p.rt, p.rs), frontLeg = leg(p.lt, p.ls);
+    const backArm = arm(p.ru, p.rf), frontArm = arm(p.lu, p.lf);
+    // backpack for Ada
+    if (kid) {
+      ctx.save(); ctx.fillStyle = '#3b4a3f'; ctx.strokeStyle = INK; ctx.lineWidth = 3.5 * s;
+      const bx = sh[0] - f * 16 * s, by = sh[1] + 4 * s;
+      roundRect(ctx, bx - 13 * s, by, 26 * s, 36 * s, 7 * s); ctx.fill(); ctx.stroke(); ctx.restore();
+    }
+    limb(ctx, backLeg, s, PAPER_BACK); limb(ctx, backArm, s, PAPER_BACK);
+    limb(ctx, [hip, neck], s, PAPER);
+    limb(ctx, frontLeg, s, PAPER);
+    // costume accents on torso
+    if (o.who === 'daniel') { // lanyard + badge
+      ctx.strokeStyle = '#2f6f7a'; ctx.lineWidth = 2.4 * s;
+      ctx.beginPath(); ctx.moveTo(neck[0] - 5 * s, neck[1] + 2 * s); ctx.lineTo(sh[0] + f * 2 * s, sh[1] + 24 * s); ctx.lineTo(neck[0] + 5 * s, neck[1] + 2 * s); ctx.stroke();
+      ctx.fillStyle = '#d7e7ea'; ctx.strokeStyle = INK; ctx.lineWidth = 2 * s;
+      ctx.fillRect(sh[0] + f * 2 * s - 6 * s, sh[1] + 23 * s, 12 * s, 15 * s); ctx.strokeRect(sh[0] + f * 2 * s - 6 * s, sh[1] + 23 * s, 12 * s, 15 * s);
+    }
+    if (kid) { // strap
+      ctx.strokeStyle = '#3b4a3f'; ctx.lineWidth = 4 * s;
+      ctx.beginPath(); ctx.moveTo(sh[0] - f * 4 * s, sh[1] - 2 * s); ctx.lineTo(sh[0] + f * 4 * s, sh[1] + 30 * s); ctx.stroke();
+    }
+    limb(ctx, frontArm, s, PAPER);
+    if (o.prop === 'bag') {
+      const h = frontArm[2]; ctx.fillStyle = '#7a4b36'; ctx.strokeStyle = INK; ctx.lineWidth = 3 * s;
+      roundRect(ctx, h[0] - 11 * s, h[1], 22 * s, 18 * s, 4 * s); ctx.fill(); ctx.stroke();
+    }
+    drawHead(ctx, head[0], head[1], hr, f, o.expr || 'neutral', o.who, o);
+    return { head, hands: [frontArm[2], backArm[2]] };
+  }
+  function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+
+  const EXPR = {
+    //        eye size, pupil, brow inner, brow outer, mouth
+    neutral:  { e: 1,    p: 1,    bi: 0,     bo: 0,     m: 'line' },
+    fear:     { e: 1.22, p: 0.6,  bi: -0.16, bo: 0.02,  m: 'open' },
+    dread:    { e: 0.92, p: 0.7,  bi: -0.09, bo: 0.05,  m: 'wave' },
+    resolve:  { e: 0.82, p: 1.05, bi: 0.13,  bo: -0.05, m: 'flat' },
+    grief:    { e: 1,    p: 1,    bi: -0.17, bo: 0.06,  m: 'down', closed: true },
+    relief:   { e: 0.95, p: 1,    bi: -0.05, bo: -0.03, m: 'smile', soft: true },
+  };
+  function drawHead(ctx, cx, cy, r, f, expr, who, o) {
+    const E = EXPR[expr] || EXPR.neutral, k = r / 31;
+    ctx.save();
+    if (who === 'ada') { // ponytail
+      ctx.lineCap = 'round';
+      ctx.beginPath(); ctx.moveTo(cx - f * r * 0.55, cy - r * 0.75);
+      ctx.quadraticCurveTo(cx - f * r * 1.5, cy - r * 0.9, cx - f * r * 1.35, cy + r * 0.45);
+      ctx.strokeStyle = INK; ctx.lineWidth = 13 * k; ctx.stroke();
+      ctx.strokeStyle = '#2b211c'; ctx.lineWidth = 8 * k; ctx.stroke();
+    }
+    ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU);
+    ctx.fillStyle = PAPER; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 3.8 * k; ctx.stroke();
+    // subtle shading on back of head
+    ctx.save(); ctx.clip();
+    ctx.fillStyle = 'rgba(30,40,55,0.13)'; ctx.beginPath(); ctx.arc(cx + f * r * 0.35, cy + r * 0.15, r * 1.05, 0, TAU); ctx.rect(cx - r * 2, cy - r * 2, r * 4, r * 4); ctx.fill('evenodd');
+    ctx.restore();
+
+    const ex = cx + f * r * 0.24, ey = cy - r * 0.05;
+    const look = o.look || [f * 0.5, 0];
+    const eyes = [ex - r * 0.29, ex + r * 0.29];
+    ctx.lineCap = 'round';
+    const blink = o.blink;
+    eyes.forEach((x) => {
+      const rx = r * 0.17 * E.e, ry = r * 0.22 * E.e;
+      if (E.closed || blink) {
+        ctx.strokeStyle = INK; ctx.lineWidth = 3 * k;
+        ctx.beginPath(); ctx.arc(x, ey + (E.closed ? -ry * 0.1 : 0), rx, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke();
+        return;
+      }
+      ctx.beginPath(); ctx.ellipse(x, ey, rx, ry, 0, 0, TAU);
+      ctx.fillStyle = '#fff'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 2.6 * k; ctx.stroke();
+      ctx.beginPath(); ctx.arc(x + look[0] * rx * 0.45, ey + look[1] * ry * 0.45 + (E.soft ? ry * 0.15 : 0), r * 0.075 * E.p, 0, TAU);
+      ctx.fillStyle = INK; ctx.fill();
+      if (E.soft) { ctx.fillStyle = PAPER; ctx.fillRect(x - rx - 2, ey + ry * 0.35, rx * 2 + 4, ry); ctx.strokeStyle = INK; ctx.lineWidth = 2.2 * k; ctx.beginPath(); ctx.moveTo(x - rx, ey + ry * 0.35); ctx.lineTo(x + rx, ey + ry * 0.35); ctx.stroke(); }
+    });
+    // eye bags for Daniel
+    if (who === 'daniel') {
+      ctx.strokeStyle = 'rgba(7,8,11,0.45)'; ctx.lineWidth = 1.8 * k;
+      eyes.forEach(x => { ctx.beginPath(); ctx.arc(x, ey + r * 0.2, r * 0.15, 0.25 * Math.PI, 0.75 * Math.PI); ctx.stroke(); });
+    }
+    // brows
+    ctx.strokeStyle = INK; ctx.lineWidth = 3.6 * k;
+    const by = cy - r * 0.42;
+    eyes.forEach((x, i) => {
+      const inner = i === 0 ? x + r * 0.13 : x - r * 0.13;
+      const outer = i === 0 ? x - r * 0.15 : x + r * 0.15;
+      ctx.beginPath(); ctx.moveTo(outer, by + E.bo * r * (E.e > 1.1 ? -0.6 : 1) - (E.e - 1) * r * 0.3); ctx.lineTo(inner, by + E.bi * r - (E.e - 1) * r * 0.25); ctx.stroke();
+    });
+    // mouth
+    const mx = ex, my = cy + r * 0.47; ctx.lineWidth = 3 * k;
+    ctx.beginPath();
+    switch (E.m) {
+      case 'open': ctx.ellipse(mx, my + r * 0.02, r * 0.11, r * 0.15, 0, 0, TAU); ctx.fillStyle = INK; ctx.fill(); break;
+      case 'wave': ctx.moveTo(mx - r * 0.17, my); ctx.quadraticCurveTo(mx - r * 0.08, my - r * 0.07, mx, my); ctx.quadraticCurveTo(mx + r * 0.08, my + r * 0.07, mx + r * 0.17, my); ctx.stroke(); break;
+      case 'flat': ctx.moveTo(mx - r * 0.18, my + r * 0.02); ctx.lineTo(mx + r * 0.18, my); ctx.stroke(); break;
+      case 'down': ctx.arc(mx, my + r * 0.12, r * 0.13, 1.15 * Math.PI, 1.85 * Math.PI); ctx.stroke(); break;
+      case 'smile': ctx.arc(mx, my - r * 0.1, r * 0.15, 0.2 * Math.PI, 0.8 * Math.PI); ctx.stroke(); break;
+      default: ctx.moveTo(mx - r * 0.1, my); ctx.lineTo(mx + r * 0.1, my); ctx.stroke();
+    }
+    if (E.closed) { // tear
+      ctx.fillStyle = '#8fd0ff'; ctx.strokeStyle = INK; ctx.lineWidth = 1.5 * k;
+      const tx = eyes[1], ty = ey + r * 0.32; ctx.beginPath(); ctx.moveTo(tx, ty - r * 0.08); ctx.quadraticCurveTo(tx + r * 0.07, ty + r * 0.04, tx, ty + r * 0.07); ctx.quadraticCurveTo(tx - r * 0.07, ty + r * 0.04, tx, ty - r * 0.08); ctx.fill(); ctx.stroke();
+    }
+    // hair / props
+    ctx.strokeStyle = INK; ctx.lineCap = 'round';
+    if (who === 'daniel') {
+      ctx.lineWidth = 3.2 * k;
+      [[-0.35, -1.25], [-0.1, -1.38], [0.15, -1.3], [0.38, -1.18]].forEach(([dx, dy], i) => {
+        ctx.beginPath(); ctx.moveTo(cx + dx * r, cy - r * 0.97); ctx.quadraticCurveTo(cx + (dx + 0.08 * (i % 2 ? 1 : -1)) * r, cy + dy * r * 0.9, cx + (dx + (i % 2 ? 0.12 : -0.1)) * r, cy + dy * r); ctx.stroke();
+      });
+      // stubble
+      ctx.fillStyle = 'rgba(7,8,11,0.32)'; const sr = rng(3);
+      for (let i = 0; i < 14; i++) { const a = 0.15 * Math.PI + sr() * 0.7 * Math.PI; const rr = r * (0.72 + sr() * 0.18); ctx.beginPath(); ctx.arc(cx + f * r * 0.12 + Math.cos(a) * rr * 0.9, cy + Math.sin(a) * rr, 1.1 * k, 0, TAU); ctx.fill(); }
+    }
+    if (who === 'ada') {
+      ctx.strokeStyle = '#2b211c'; ctx.lineWidth = 4.5 * k;
+      for (let i = 0; i < 4; i++) { const a = -Math.PI * (0.8 - i * 0.12) + (f < 0 ? 0 : 0); const sx = cx + Math.cos(a) * r * 0.95 * f, sy = cy + Math.sin(a) * r * 0.95; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.quadraticCurveTo(sx + f * r * 0.25, sy + r * 0.05, sx + f * r * 0.42, sy + r * 0.2); ctx.stroke(); }
+    }
+    if (who === 'driver') {
+      ctx.fillStyle = '#26365a'; ctx.strokeStyle = INK; ctx.lineWidth = 3.2 * k;
+      ctx.beginPath(); ctx.moveTo(cx - r * 0.98, cy - r * 0.32); ctx.quadraticCurveTo(cx - r * 0.9, cy - r * 1.18, cx, cy - r * 1.15); ctx.quadraticCurveTo(cx + r * 0.9, cy - r * 1.18, cx + r * 0.98, cy - r * 0.32); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + f * r * 0.3, cy - r * 0.38); ctx.lineTo(cx + f * r * 1.35, cy - r * 0.3); ctx.lineTo(cx + f * r * 0.95, cy - r * 0.42); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = AMBER; ctx.fillRect(cx + f * r * 0.1 - 5 * k, cy - r * 0.85, 10 * k, 8 * k);
+      // moustache
+      ctx.fillStyle = '#3a3a3a'; ctx.beginPath(); ctx.ellipse(ex - r * 0.1, cy + r * 0.32, r * 0.14, r * 0.06, 0.1, 0, TAU); ctx.ellipse(ex + r * 0.1, cy + r * 0.32, r * 0.14, r * 0.06, -0.1, 0, TAU); ctx.fill();
+    }
+    if (o.headset) {
+      ctx.strokeStyle = '#2a2f36'; ctx.lineWidth = 6 * k;
+      ctx.beginPath(); ctx.arc(cx, cy, r * 1.08, 1.12 * Math.PI, 1.88 * Math.PI); ctx.stroke();
+      glow(ctx, cx, cy - r * 1.05, r * 0.4, CYAN, 0.8);
+    }
+    ctx.restore();
+  }
+
+  // ---------- environments ----------
+  const city = (() => { const r = rng(42), b = []; let x = -20; while (x < 1400) { const w = 40 + r() * 70, h = 80 + r() * 220; b.push({ x, w, h, win: Array.from({ length: 40 }, () => r() < 0.28) }); x += w + 4; } return b; })();
+  function skyline(ctx, base, tint, winColor, alpha = 1) {
+    ctx.save(); ctx.globalAlpha = alpha;
+    city.forEach(bd => {
+      ctx.fillStyle = tint; ctx.fillRect(bd.x, base - bd.h, bd.w, bd.h);
+      ctx.fillStyle = winColor; let i = 0;
+      for (let yy = base - bd.h + 12; yy < base - 10; yy += 18) for (let xx = bd.x + 7; xx < bd.x + bd.w - 8; xx += 14) { if (bd.win[i++ % 40]) ctx.fillRect(xx, yy, 5, 7); }
+    });
+    ctx.restore();
+  }
+  function trafficFeed(ctx, x, y, w, h, t, seed) {
+    const r = rng(seed);
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    ctx.fillStyle = '#071319'; ctx.fillRect(x, y, w, h);
+    const roads = [];
+    for (let i = 0; i < 3; i++) roads.push({ hz: r() < 0.5, p: 0.2 + r() * 0.6, sp: 0.04 + r() * 0.08 });
+    roads.forEach(rd => {
+      ctx.strokeStyle = 'rgba(95,211,230,0.28)'; ctx.lineWidth = 7;
+      ctx.beginPath(); if (rd.hz) { ctx.moveTo(x, y + h * rd.p); ctx.lineTo(x + w, y + h * rd.p); } else { ctx.moveTo(x + w * rd.p, y); ctx.lineTo(x + w * rd.p, y + h); } ctx.stroke();
+      for (let c = 0; c < 5; c++) {
+        const q = ((t * rd.sp + c / 5 + r() * 0.1) % 1);
+        ctx.fillStyle = c % 3 ? '#e9f6f8' : AMBER;
+        if (rd.hz) ctx.fillRect(x + q * w - 3, y + h * rd.p - 2, 7, 4); else ctx.fillRect(x + w * rd.p - 2, y + q * h - 3, 4, 7);
+      }
+    });
+    ctx.fillStyle = 'rgba(95,211,230,0.75)'; ctx.font = '500 11px "IBM Plex Mono", monospace';
+    ctx.fillText(`CAM-${pad(seed)}  23:48`, x + 8, y + 16);
+    scanlines(ctx, x, y, w, h, 0.18);
+    ctx.restore();
+  }
+  function scanlines(ctx, x, y, w, h, a) { ctx.fillStyle = `rgba(0,0,0,${a})`; for (let yy = y; yy < y + h; yy += 3) ctx.fillRect(x, yy, w, 1); }
+
+  // ---------- SCENE A: control room ----------
+  const NARR = [
+    ['NARRATOR', 'At 11:48 PM, Daniel watched forty-seven people die.'],
+    ['NARRATOR', 'The recording was stamped 12:00 AM.'],
+    ['NARRATOR', 'It came from twelve minutes in the future.'],
+    ['NARRATOR', 'And his daughter was on that bus.'],
+  ];
+  function sceneControl(ctx, t) {
+    const W = 1280, H = 720;
+    const cyc = (t % 16) / 16, z = 1 + 0.07 * (cyc * cyc * (3 - 2 * cyc));
+    ctx.save();
+    ctx.fillStyle = '#05070a'; ctx.fillRect(0, 0, W, H);
+    ctx.translate(700, 300); ctx.scale(z, z); ctx.translate(-700, -300);
+    const bg = ctx.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#0b111a'); bg.addColorStop(1, '#040609');
+    ctx.fillStyle = bg; ctx.fillRect(-100, -100, W + 200, H + 200);
+    // monitor wall
+    const sw = 250, sh = 142, gx = 18, x0 = 440, y0 = 64;
+    const pulse = 0.5 + 0.5 * Math.sin(t * 5.2);
+    for (let row = 0; row < 2; row++) for (let col = 0; col < 3; col++) {
+      const x = x0 + col * (sw + gx), y = y0 + row * (sh + gx);
+      ctx.fillStyle = '#151b23'; ctx.fillRect(x - 7, y - 7, sw + 14, sh + 14);
+      if (row === 0 && col === 1) {
+        // alert feed
+        ctx.save(); ctx.beginPath(); ctx.rect(x, y, sw, sh); ctx.clip();
+        ctx.fillStyle = '#1b0709'; ctx.fillRect(x, y, sw, sh);
+        ctx.fillStyle = '#3a1013'; ctx.fillRect(x, y + 86, sw, 10);
+        for (let i = 0; i < 12; i++) ctx.fillRect(x + i * 22, y + 72, 3, 14);
+        ctx.save(); ctx.translate(x + 132, y + 92); ctx.rotate(0.42);
+        ctx.fillStyle = '#d7c9b3'; ctx.fillRect(-46, -24, 92, 30); ctx.fillStyle = '#3a1013'; for (let i = 0; i < 5; i++) ctx.fillRect(-38 + i * 16, -18, 11, 9);
+        ctx.restore();
+        ctx.fillStyle = RED; ctx.font = '600 12px "IBM Plex Mono", monospace'; ctx.fillText('CAM-14  E.BRIDGE', x + 8, y + 18);
+        ctx.fillStyle = pulse > 0.4 ? AMBER : 'rgba(242,167,59,0.35)'; ctx.font = '600 22px "IBM Plex Mono", monospace'; ctx.fillText('12:00:00 AM', x + 8, y + sh - 12);
+        ctx.fillStyle = RED; ctx.beginPath(); ctx.arc(x + sw - 16, y + 14, 5, 0, TAU); ctx.globalAlpha = pulse; ctx.fill(); ctx.globalAlpha = 1;
+        scanlines(ctx, x, y, sw, sh, 0.25);
+        ctx.restore();
+        ctx.strokeStyle = hexA(RED, 0.4 + 0.6 * pulse); ctx.lineWidth = 3; ctx.strokeRect(x - 2, y - 2, sw + 4, sh + 4);
+      } else trafficFeed(ctx, x, y, sw, sh, t, row * 3 + col + 2);
+    }
+    // wall clock
+    const cx = 1150, cy = 110, cr = 52, sec = Math.floor(t) % 60;
+    ctx.fillStyle = '#0f141b'; ctx.beginPath(); ctx.arc(cx, cy, cr, 0, TAU); ctx.fill(); ctx.strokeStyle = '#2a323d'; ctx.lineWidth = 5; ctx.stroke();
+    ctx.strokeStyle = '#8a94a0'; ctx.lineWidth = 2;
+    for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; ctx.beginPath(); ctx.moveTo(cx + Math.sin(a) * cr * 0.78, cy - Math.cos(a) * cr * 0.78); ctx.lineTo(cx + Math.sin(a) * cr * 0.9, cy - Math.cos(a) * cr * 0.9); ctx.stroke(); }
+    const hand = (a, l, wdt, col) => { ctx.strokeStyle = col; ctx.lineWidth = wdt; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.sin(a) * l, cy - Math.cos(a) * l); ctx.stroke(); };
+    hand((11 + 48 / 60) / 12 * TAU, cr * 0.48, 5, PAPER); hand((48 + sec / 60) / 60 * TAU, cr * 0.72, 3.5, PAPER); hand(sec / 60 * TAU, cr * 0.8, 1.5, RED);
+    ctx.fillStyle = AMBER; ctx.font = '600 18px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.fillText(`23:48:${pad(sec)}`, cx, cy + cr + 28); ctx.textAlign = 'left';
+    // light from screens
+    glow(ctx, 700, 220, 720, CYAN, 0.14);
+    glow(ctx, 698, 140, 620, RED, 0.08 + 0.2 * pulse);
+    // chair
+    ctx.fillStyle = '#10151c'; ctx.strokeStyle = '#1c242e'; ctx.lineWidth = 3;
+    roundRect(ctx, 168, 380, 34, 140, 10); ctx.fill(); ctx.stroke();
+    // Daniel seated
+    const lean = 0.32 + 0.02 * Math.sin(t * 1.3);
+    figure(ctx, { x: 230, y: 500, s: 1.9, f: 1, who: 'daniel', expr: 'fear', look: [0.9, -0.5],
+      pose: { torso: lean, lt: 1.55, ls: -1.45, rt: 1.45, rs: -1.4, lu: 1.25, lf: 0.55, ru: 1.05, rf: 0.7 },
+      blink: (t % 4.1) < 0.12 });
+    // light on Daniel
+    glow(ctx, 330, 330, 260, RED, 0.12 + 0.22 * pulse);
+    // desk
+    ctx.fillStyle = '#0c1016'; ctx.beginPath(); ctx.moveTo(-100, 548); ctx.lineTo(W + 100, 528); ctx.lineTo(W + 100, H + 100); ctx.lineTo(-100, H + 100); ctx.fill();
+    ctx.strokeStyle = 'rgba(95,211,230,0.35)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-100, 548); ctx.lineTo(W + 100, 528); ctx.stroke();
+    // keyboard
+    ctx.fillStyle = '#17202a'; ctx.fillRect(250, 532, 200, 14); glow(ctx, 350, 538, 140, CYAN, 0.25);
+    // coffee mug (loop prop)
+    ctx.fillStyle = '#c8c2b6'; ctx.strokeStyle = INK; ctx.lineWidth = 3; roundRect(ctx, 640, 494, 36, 40, 5); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(680, 512, 9, -0.5 * Math.PI, 0.5 * Math.PI); ctx.stroke();
+    ctx.strokeStyle = 'rgba(233,229,220,0.25)'; ctx.lineWidth = 2;
+    for (let i = 0; i < 2; i++) { ctx.beginPath(); const sx = 650 + i * 14; ctx.moveTo(sx, 488); ctx.bezierCurveTo(sx - 8, 470 - Math.sin(t * 2 + i) * 4, sx + 8, 460, sx, 440); ctx.stroke(); }
+    // photo frame
+    ctx.fillStyle = '#3d2d22'; ctx.save(); ctx.translate(760, 530); ctx.rotate(-0.06); ctx.fillRect(-30, -52, 60, 48); ctx.fillStyle = '#cbbfa8'; ctx.fillRect(-25, -47, 50, 38);
+    [[-13, -30, 6], [0, -32, 6.5], [13, -27, 4.5]].forEach(([px, py, pr]) => { ctx.beginPath(); ctx.arc(px, py, pr, 0, TAU); ctx.fillStyle = '#f0ebe1'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 1.2; ctx.stroke(); });
+    ctx.restore();
+    ctx.restore();
+    vignette(ctx, W, H, 0.85);
+    addGrain(ctx, W, H, 0.12, t);
+    letterbox(ctx, W, H, 48);
+    const n = NARR[Math.floor(t / 4) % NARR.length];
+    subtitle(ctx, W, H - 82, n[0], n[1]);
+  }
+
+  // ---------- SCENE B: CCTV bridge ----------
+  function sceneCCTV(ctx, t) {
+    const W = 1280, H = 720, p = t % 10;
+    ctx.save();
+    // impact shake
+    if (p > 4.6 && p < 5.4) { const k = (5.4 - p) * 14; ctx.translate((Math.random() - 0.5) * k, (Math.random() - 0.5) * k); }
+    ctx.fillStyle = '#04070a'; ctx.fillRect(-40, -40, W + 80, H + 80);
+    skyline(ctx, 330, '#0c1418', 'rgba(242,200,120,0.55)');
+    // river
+    const rv = ctx.createLinearGradient(0, 430, 0, H); rv.addColorStop(0, '#071016'); rv.addColorStop(1, '#020405'); ctx.fillStyle = rv; ctx.fillRect(-40, 430, W + 80, H);
+    ctx.fillStyle = 'rgba(242,200,120,0.12)';
+    for (let i = 0; i < 40; i++) { const xx = (i * 97 + t * 8) % W; ctx.fillRect(xx, 470 + (i * 37) % 220, 30 + (i % 4) * 12, 2); }
+    // bridge pillars
+    ctx.fillStyle = '#121a20'; [160, 560, 960].forEach(px => ctx.fillRect(px, 420, 46, 320));
+    // deck
+    ctx.fillStyle = '#1a2329'; ctx.fillRect(-40, 400, W + 80, 30);
+    ctx.fillStyle = '#273138'; ctx.fillRect(-40, 400, W + 80, 5);
+    // lane dashes
+    ctx.fillStyle = 'rgba(240,230,200,0.3)'; for (let x = 0; x < W; x += 60) ctx.fillRect(x, 412, 30, 3);
+    // vehicles
+    const ease = v => v * v * (3 - 2 * v), cl = v => Math.max(0, Math.min(1, v));
+    // truck from right
+    const tx = 1500 - Math.min(p, 4) * 175;
+    const beamSlide = cl((p - 2.6) / 1.2);
+    // truck
+    ctx.save(); ctx.translate(tx, 400);
+    ctx.fillStyle = '#5a5f60'; ctx.fillRect(0, -70, 70, 70); ctx.fillStyle = '#20282b'; ctx.fillRect(8, -60, 40, 26);
+    ctx.fillStyle = '#3f4446'; ctx.fillRect(70, -30, 230, 22);
+    [30, 130, 250].forEach(wx => { ctx.beginPath(); ctx.arc(wx, -6, 13, 0, TAU); ctx.fillStyle = '#0c0f10'; ctx.fill(); });
+    ctx.fillStyle = '#f5f0d0'; ctx.fillRect(-4, -26, 6, 10); glow(ctx, -10, -20, 140, '#fff6cf', 0.35);
+    ctx.restore();
+    // beam
+    ctx.save();
+    const bx = tx + 80 - beamSlide * 70, by = 400 - 40 + beamSlide * 34;
+    ctx.translate(bx + 110, by); ctx.rotate(-beamSlide * 0.35);
+    ctx.fillStyle = '#8b7e6a'; ctx.fillRect(-110, -10, 230, 12); ctx.restore();
+    // bus
+    const busIn = cl(p / 4);
+    let bx2 = -280 + ease(busIn) * 760, by2 = 400, rot = 0, fall = 0;
+    if (p > 3.6) { const s = cl((p - 3.6) / 1.1); bx2 = 480 + s * 70; rot = s * 0.18; by2 = 400 + s * 6; }
+    if (p > 4.7) { const s = cl((p - 4.7) / 1.4); fall = s; bx2 = 550 + s * 60; rot = 0.18 + s * 0.9; by2 = 406 + s * s * 300; }
+    ctx.save(); ctx.translate(bx2 + 120, by2); ctx.rotate(rot);
+    ctx.fillStyle = '#cfc6ad'; roundRect(ctx, -120, -82, 240, 76, 8); ctx.fill();
+    ctx.fillStyle = '#1b2427'; for (let i = 0; i < 7; i++) ctx.fillRect(-110 + i * 31, -72, 24, 26);
+    ctx.fillStyle = '#0c0f10'; [-80, 80].forEach(wx => { ctx.beginPath(); ctx.arc(wx, -6, 15, 0, TAU); ctx.fill(); });
+    ctx.fillStyle = '#20282b'; ctx.font = '600 22px "IBM Plex Mono", monospace'; ctx.fillText('26', 70, -20);
+    ctx.fillStyle = '#f5f0d0'; ctx.fillRect(114, -30, 6, 10);
+    ctx.restore();
+    if (p < 4.8) glow(ctx, bx2 + 250, by2 - 25, 160, '#fff6cf', 0.3);
+    // guardrail with break
+    const broken = p > 4.7;
+    ctx.strokeStyle = '#4a555c'; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(-40, 372);
+    if (broken) { ctx.lineTo(560, 372); ctx.moveTo(760, 372); } ctx.lineTo(W + 40, 372); ctx.stroke();
+    ctx.lineWidth = 4;
+    for (let x = 0; x < W; x += 40) {
+      if (broken && x > 560 && x < 760) {
+        const s = cl((p - 4.7) / 1.5); ctx.save(); ctx.translate(x + s * 60, 372 + s * s * 260); ctx.rotate(s * 3 * ((x / 40) % 2 ? 1 : -1)); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 28); ctx.stroke(); ctx.restore();
+      } else { ctx.beginPath(); ctx.moveTo(x, 372); ctx.lineTo(x, 400); ctx.stroke(); }
+    }
+    if (p > 5.9 && p < 6.6) { ctx.fillStyle = `rgba(230,240,240,${(6.6 - p) * 0.8})`; ctx.beginPath(); ctx.ellipse(650, 560, 200 * (p - 5.8), 40, 0, 0, TAU); ctx.fill(); }
+    ctx.restore();
+    // CCTV grade
+    ctx.save(); ctx.globalCompositeOperation = 'saturation'; ctx.fillStyle = 'hsl(0,0%,50%)'; ctx.globalAlpha = 0.8; ctx.fillRect(0, 0, W, H); ctx.restore();
+    ctx.save(); ctx.globalCompositeOperation = 'multiply'; ctx.fillStyle = '#9fc4b5'; ctx.fillRect(0, 0, W, H); ctx.restore();
+    scanlines(ctx, 0, 0, W, H, 0.22);
+    addGrain(ctx, W, H, 0.32, t);
+    // tracking roll bar
+    const ry = (t * 140) % (H + 200) - 100; const rg = ctx.createLinearGradient(0, ry, 0, ry + 60); rg.addColorStop(0, 'rgba(255,255,255,0)'); rg.addColorStop(0.5, 'rgba(255,255,255,0.06)'); rg.addColorStop(1, 'rgba(255,255,255,0)'); ctx.fillStyle = rg; ctx.fillRect(0, ry, W, 60);
+    // signal lost
+    if (p > 6.6) {
+      const g = ctx.getImageData(0, 0, 1, 1); void g;
+      ctx.fillStyle = '#0a0d0e'; ctx.fillRect(0, 0, W, H);
+      addGrain(ctx, W, H, 0.9, t * 3); addGrain(ctx, W, H, 0.6, t * 5 + 1);
+      ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(W / 2 - 230, H / 2 - 44, 460, 80);
+      ctx.fillStyle = '#e9e5dc'; ctx.font = '600 40px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.fillText('NO SIGNAL', W / 2, H / 2 + 12); ctx.textAlign = 'left';
+    }
+    vignette(ctx, W, H, 0.7);
+    // HUD
+    const base = 23 * 3600 + 59 * 60 + 56 + Math.min(Math.floor(p), 6);
+    const hh = Math.floor(base / 3600) % 24, mm = Math.floor(base / 60) % 60, ss = base % 60;
+    ctx.font = '500 22px "IBM Plex Mono", monospace'; ctx.fillStyle = '#e9e5dc';
+    ctx.fillText('CAM-14   EASTERN BRIDGE   NB', 40, 54);
+    ctx.fillStyle = RED; if (Math.floor(t * 2) % 2) { ctx.beginPath(); ctx.arc(W - 120, 47, 8, 0, TAU); ctx.fill(); } ctx.fillText('REC', W - 100, 54);
+    const stamp = `13-11-2026  ${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+    ctx.font = '600 30px "IBM Plex Mono", monospace';
+    const sw2 = ctx.measureText(stamp).width;
+    ctx.fillStyle = 'rgba(0,0,0,0.6)'; ctx.fillRect(32, H - 78, sw2 + 24, 46);
+    ctx.fillStyle = hh === 0 ? AMBER : '#e9e5dc'; ctx.fillText(stamp, 44, H - 45);
+    ctx.font = '500 16px "IBM Plex Mono", monospace'; ctx.fillStyle = 'rgba(233,229,220,0.7)'; ctx.fillText('CITYWATCH // PLAYBACK', W - 270, H - 45);
+  }
+
+  // ---------- SCENE C: reset ----------
+  const buf = document.createElement('canvas'); buf.width = 1280; buf.height = 720; const bctx = buf.getContext('2d');
+  function sceneReset(ctx, t) {
+    const W = 1280, H = 720, p = t % 8, b = bctx;
+    const preReset = p < 4.6;
+    let sec = 57 + Math.min(2, Math.floor(p * 0.85));
+    const tickPunch = preReset && p < 3.4 ? Math.max(0, 1 - ((p * 0.85) % 1) * 6) : 0;
+    b.save();
+    b.fillStyle = preReset ? '#0a0507' : '#07090c'; b.fillRect(0, 0, W, H);
+    const z = 1 + tickPunch * 0.025 + (preReset ? p * 0.012 : 0);
+    b.translate(W / 2, H / 2); b.scale(z, z); b.translate(-W / 2, -H / 2);
+    // back light
+    if (preReset) glow(b, 860, 360, 560, RED, 0.25 + 0.1 * Math.sin(p * 9));
+    else glow(b, 860, 360, 560, AMBER, 0.18);
+    // Daniel ECU
+    drawHead(b, 360, 420, 230, 1, preReset ? (p > 2.4 ? 'fear' : 'dread') : 'neutral', 'daniel', { look: preReset ? [0.85, -0.1] : [0.2, 0.3], blink: !preReset && (p % 3) < 0.12 });
+    limb(b, [[360, 650], [360, 760]], 6, PAPER);
+    // sweat drop
+    if (preReset && p > 1.2) { const d = ((p - 1.2) * 60) % 160; b.fillStyle = '#9ed8ff'; b.strokeStyle = INK; b.lineWidth = 4; b.beginPath(); b.ellipse(150, 300 + d, 10, 15, 0, 0, TAU); b.fill(); b.stroke(); }
+    // clock
+    b.textAlign = 'center';
+    if (preReset) {
+      b.font = '600 132px "IBM Plex Mono", monospace'; b.fillStyle = RED; b.fillText(`11:59:${sec}`, 900, 380);
+      b.font = '500 22px "IBM Plex Mono", monospace'; b.fillStyle = 'rgba(233,229,220,0.7)'; b.fillText('SIMULATION 182,641', 900, 440);
+    } else {
+      b.font = '600 132px "IBM Plex Mono", monospace'; b.fillStyle = AMBER; b.fillText('11:48:00', 900, 380);
+      b.font = '500 22px "IBM Plex Mono", monospace'; b.fillStyle = 'rgba(233,229,220,0.7)'; b.fillText('SIMULATION 182,642', 900, 440);
+    }
+    b.textAlign = 'left';
+    b.restore();
+    vignette(b, W, H, 0.8);
+    addGrain(b, W, H, 0.14, t);
+    // composite with glitch
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    if (p > 3.0 && p < 3.9) {
+      const r = rng(Math.floor(t * 30));
+      for (let y = 0; y < H; y += 24) { const off = (r() - 0.5) * (p - 3) * 260; ctx.drawImage(buf, 0, y, W, 24, off, y, W, 24); }
+      ctx.save(); ctx.globalCompositeOperation = 'screen'; ctx.globalAlpha = 0.5; ctx.drawImage(buf, 12, 0); ctx.fillStyle = 'rgba(0,255,255,0.12)'; ctx.fillRect(0, 0, W, H); ctx.restore();
+    } else ctx.drawImage(buf, 0, 0);
+    if (p >= 3.9 && p < 4.3) { ctx.fillStyle = `rgba(255,255,255,${1 - (p - 3.9) / 0.6})`; ctx.fillRect(0, 0, W, H); }
+    if (p >= 4.3 && p < 4.6) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H); }
+    letterbox(ctx, W, H, 48);
+    if (p > 5.2) subtitle(ctx, W, H - 82, 'ADA · PHONE', 'Dad, are you watching my bus again?');
+    else if (preReset && p > 1.4 && p < 3) subtitle(ctx, W, H - 82, 'DANIEL', 'No. No, no, no…', PAPER);
+  }
+
+  // ---------- SCENE D: ending ----------
+  function sceneEnding(ctx, t) {
+    const W = 1280, H = 720, ground = 600;
+    const sky = ctx.createLinearGradient(0, 0, 0, ground); sky.addColorStop(0, '#070b14'); sky.addColorStop(1, '#1a1612');
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+    // stars
+    const r = rng(11); ctx.fillStyle = 'rgba(233,229,220,0.6)'; for (let i = 0; i < 60; i++) ctx.fillRect(r() * W, r() * 260, 1.5, 1.5);
+    // skyline far, parallax
+    ctx.save(); ctx.translate(-(t * 6) % 200, 0); skyline(ctx, 470, '#0d1015', 'rgba(242,167,59,0.4)', 0.9); ctx.restore();
+    // control center building (stays put, receding)
+    const bx = 860 + -(t * 4 % 400) * 0; // static
+    ctx.fillStyle = '#12161c'; ctx.fillRect(bx, 290, 360, 310);
+    ctx.fillStyle = '#0b0f14'; ctx.fillRect(bx + 30, 330, 300, 120);
+    ctx.fillStyle = '#071a1f'; ctx.fillRect(bx + 50, 345, 260, 90); glow(ctx, bx + 180, 390, 240, CYAN, 0.25);
+    ctx.fillStyle = CYAN; ctx.font = '600 15px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
+    ctx.fillText('NO PREDICTION', bx + 180, 385); ctx.fillText('AVAILABLE', bx + 180, 405); ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(233,229,220,0.55)'; ctx.font = '500 13px "IBM Plex Mono", monospace'; ctx.fillText('CITY TRAFFIC CONTROL', bx + 30, 312);
+    // ground
+    ctx.fillStyle = '#16120e'; ctx.fillRect(0, ground, W, H - ground);
+    ctx.fillStyle = '#211a13'; ctx.fillRect(0, ground, W, 6);
+    // streetlights scrolling
+    const off = (t * 40) % 460;
+    for (let i = -1; i < 4; i++) {
+      const lx = i * 460 + 200 - off;
+      ctx.fillStyle = '#20252b'; ctx.fillRect(lx, 230, 8, ground - 230); ctx.fillRect(lx, 230, 60, 7);
+      ctx.save(); ctx.globalCompositeOperation = 'screen';
+      const cone = ctx.createLinearGradient(0, 240, 0, ground); cone.addColorStop(0, 'rgba(242,167,59,0.35)'); cone.addColorStop(1, 'rgba(242,167,59,0.05)');
+      ctx.fillStyle = cone; ctx.beginPath(); ctx.moveTo(lx + 44, 240); ctx.lineTo(lx + 64, 240); ctx.lineTo(lx + 170, ground); ctx.lineTo(lx - 60, ground); ctx.fill();
+      ctx.restore();
+      glow(ctx, lx + 54, ground, 160, AMBER, 0.25);
+      glow(ctx, lx + 54, 240, 50, '#ffd9a0', 0.9);
+    }
+    // walkers
+    const ph = t * 3.6;
+    const walk = (ph0) => {
+      const a = Math.sin(ph0), b2 = Math.sin(ph0 + Math.PI);
+      return { torso: 0.05, lt: a * 0.42, ls: -Math.max(0, -Math.cos(ph0)) * 0.7, rt: b2 * 0.42, rs: -Math.max(0, -Math.cos(ph0 + Math.PI)) * 0.7, lu: -a * 0.45, lf: 0.25, ru: -b2 * 0.45, rf: 0.25 };
+    };
+    const bob = Math.abs(Math.cos(ph)) * 4;
+    const talkD = Math.floor(t / 3.5) % 2 === 1;
+    figure(ctx, { x: 620, y: ground - 74 * 1.7 - bob, s: 1.7, f: 1, who: 'daniel', expr: 'relief', look: talkD ? [-0.9, 0.3] : [1, 0.2], headTilt: 0.08, pose: walk(ph) });
+    figure(ctx, { x: 470, y: ground - 74 * 1.7 * 0.86 - Math.abs(Math.cos(ph + 0.6)) * 4, s: 1.7, f: 1, who: 'ada', expr: talkD ? 'neutral' : 'relief', look: [1, -0.6], prop: 'bag', pose: Object.assign(walk(ph + 0.6), { torso: -0.04 }) });
+    // warm grade
+    ctx.save(); ctx.globalCompositeOperation = 'soft-light'; ctx.fillStyle = 'rgba(242,167,59,0.35)'; ctx.fillRect(0, 0, W, H); ctx.restore();
+    vignette(ctx, W, H, 0.7);
+    addGrain(ctx, W, H, 0.1, t);
+    letterbox(ctx, W, H, 48);
+    if (talkD) subtitle(ctx, W, H - 82, 'DANIEL', "I've had a very long night.", PAPER);
+    else subtitle(ctx, W, H - 82, 'ADA', "It's barely midnight.");
+  }
+
+  // ---------- cast cards ----------
+  function card(ctx, t, who) {
+    const W = 480, H = 560;
+    const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#111821'); g.addColorStop(1, '#07090c');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(95,211,230,0.08)'; ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 40) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    ctx.fillStyle = '#1a222c'; ctx.beginPath(); ctx.ellipse(240, 500, 120, 16, 0, 0, TAU); ctx.fill();
+    const breathe = Math.sin(t * 1.6) * 0.03;
+    if (who === 'system') {
+      const cx = 240, cy = 260;
+      glow(ctx, cx, cy, 220, CYAN, 0.25);
+      ctx.strokeStyle = CYAN; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(cx, cy, 120, 0, TAU); ctx.stroke();
+      ctx.globalAlpha = 0.4; ctx.beginPath(); ctx.arc(cx, cy, 140, t * 0.6, t * 0.6 + 4.2); ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.beginPath();
+      for (let x = -90; x <= 90; x += 3) { const env = Math.cos(x / 90 * Math.PI / 2); const y = Math.sin(x * 0.18 + t * 8) * Math.sin(x * 0.05 - t * 3) * 38 * env * (0.4 + 0.6 * Math.abs(Math.sin(t * 1.7))); x === -90 ? ctx.moveTo(cx + x, cy + y) : ctx.lineTo(cx + x, cy + y); }
+      ctx.stroke();
+      ctx.fillStyle = CYAN; ctx.font = '500 16px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
+      ctx.fillText('NO GUARANTEED OUTCOME FOUND', cx, 450); ctx.textAlign = 'left';
+      scanlines(ctx, 0, 0, W, H, 0.15);
+      return;
+    }
+    const s = who === 'ada' ? 2.1 : 2.1;
+    const hipY = 500 - 74 * s * (who === 'ada' ? 0.86 : 1);
+    const poses = {
+      daniel: { torso: 0.12 + breathe, lu: 0.35, lf: 0.6, ru: -0.1, rf: 0.5, lt: 0.1, rt: -0.08 },
+      ada: { torso: -0.03 + breathe, lu: -0.3, lf: -0.2, ru: 0.15, rf: 0.25, lt: 0.14, rt: -0.14 },
+      driver: { torso: breathe, lu: 0.5, lf: 1.6, ru: -0.25, rf: -0.1, lt: 0.12, rt: -0.12 },
+    };
+    const exprs = { daniel: 'dread', ada: 'relief', driver: 'neutral' };
+    figure(ctx, { x: 240, y: hipY, s, f: who === 'ada' ? -1 : 1, who, expr: exprs[who], pose: poses[who], blink: ((t + (who === 'ada' ? 1.3 : 0)) % 3.7) < 0.12, prop: who === 'ada' ? 'phone' : null });
+    if (who === 'driver') { // radio handset in hand
+      ctx.fillStyle = '#20262c'; ctx.strokeStyle = INK; ctx.lineWidth = 3; roundRect(ctx, 286, 205, 22, 34, 5); ctx.fill(); ctx.stroke();
+    }
+    const tint = { daniel: CYAN, ada: AMBER, driver: '#7f9cc9' }[who];
+    glow(ctx, who === 'ada' ? 120 : 380, 160, 260, tint, 0.16);
+    vignette(ctx, W, H, 0.5);
+  }
+
+  function expressions(ctx) {
+    const W = 1200, H = 300; ctx.fillStyle = '#0d1218'; ctx.fillRect(0, 0, W, H);
+    const list = [['neutral', 'WATCHING'], ['fear', 'FEAR'], ['dread', 'DREAD'], ['resolve', 'RESOLVE'], ['grief', 'GRIEF'], ['relief', 'RELIEF']];
+    list.forEach(([e, l], i) => {
+      const cx = 100 + i * 200;
+      drawHead(ctx, cx, 130, 72, 1, e, 'daniel', { look: e === 'fear' ? [0.6, -0.6] : e === 'dread' ? [0.2, 0.6] : [0.6, 0] });
+      ctx.fillStyle = '#8a94a0'; ctx.font = '500 15px "IBM Plex Mono", monospace'; ctx.textAlign = 'center'; ctx.fillText(l, cx, 268); ctx.textAlign = 'left';
+    });
+  }
+
+  // ---------- static data ----------
+  const SCENES = [
+    ['01', 'The accident that hasn’t happened', '#05070a', '#ff4040', 9],
+    ['02', 'The man behind the cameras', '#0b1620', '#f2a73b', 3],
+    ['03', 'The first rescue', '#081a20', '#5fd3e6', 6],
+    ['04', 'Every solution makes it worse', '#1a080a', '#ff6a3a', 8.5],
+    ['05', 'Midnight', '#f4f4f0', '#05070a', 10],
+    ['06', 'The lives he doesn’t remember', '#0a1118', '#6f9fb2', 6.5],
+    ['07', 'The terrible truth', '#04161a', '#5fd3e6', 8],
+    ['08', 'The promise', '#140e0a', '#b07a4a', 3.5],
+    ['09', 'The one thing he missed', '#0b1016', '#f2a73b', 9.5],
+    ['10', 'The real twelve minutes', '#0e1418', '#d9e2e6', 7],
+    ['11', 'No prediction available', '#16110b', '#f6c27a', 2],
+  ];
+  const cs = document.getElementById('colorscript');
+  SCENES.forEach(([n, name, a, b]) => {
+    const d = document.createElement('div'); d.className = 'cs';
+    d.innerHTML = `<i style="background:linear-gradient(180deg,${a} 0%,${a} 45%,${b} 100%)"></i><span><b>${n}</b>${name}</span>`;
+    cs.appendChild(d);
+  });
+  // tension chart
+  (() => {
+    const svg = document.getElementById('tension'), X = i => 70 + i * 88, Y = v => 260 - v * 21;
+    let h = '';
+    [0, 5, 10].forEach(v => { h += `<line x1="60" x2="960" y1="${Y(v)}" y2="${Y(v)}" stroke="#1f2833" stroke-width="1"/><text x="48" y="${Y(v) + 4}" fill="#8a94a0" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="end">${v}</text>`; });
+    const pts = SCENES.map((s, i) => [X(i), Y(s[4])]);
+    let d = `M${pts[0][0]},${pts[0][1]}`;
+    for (let i = 1; i < pts.length; i++) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i]; const mx = (x0 + x1) / 2; d += ` C${mx},${y0} ${mx},${y1} ${x1},${y1}`; }
+    h += `<defs><linearGradient id="tg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff4040" stop-opacity="0.35"/><stop offset="1" stop-color="#ff4040" stop-opacity="0"/></linearGradient></defs>`;
+    h += `<path d="${d} L${pts[10][0]},${Y(0)} L${pts[0][0]},${Y(0)} Z" fill="url(#tg)"/>`;
+    h += `<path d="${d}" fill="none" stroke="#ff4040" stroke-width="3"/>`;
+    const notes = { 0: 'Hook: crash in 45s', 4: 'Reset', 7: 'Quiet before', 8: 'The choice', 10: 'Release' };
+    pts.forEach(([x, y], i) => {
+      h += `<circle cx="${x}" cy="${y}" r="5" fill="#06080b" stroke="${i === 10 ? '#f2a73b' : '#ff4040'}" stroke-width="2.5"/>`;
+      h += `<text x="${x}" y="292" fill="#8a94a0" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">S${SCENES[i][0]}</text>`;
+      if (notes[i]) h += `<text x="${x}" y="${y - 14}" fill="#e9e5dc" font-family="IBM Plex Mono, monospace" font-size="12" text-anchor="middle">${notes[i]}</text>`;
+    });
+    svg.innerHTML = h;
+  })();
+
+  // ---------- run ----------
+  const jobs = [
+    ['hero', sceneControl], ['cctv', sceneCCTV], ['reset', sceneReset], ['ending', sceneEnding],
+    ['c-daniel', (c, t) => card(c, t, 'daniel')], ['c-ada', (c, t) => card(c, t, 'ada')],
+    ['c-driver', (c, t) => card(c, t, 'driver')], ['c-system', (c, t) => card(c, t, 'system')],
+  ].map(([id, fn]) => { const el = document.getElementById(id); return { el, ctx: el.getContext('2d'), fn, vis: true }; });
+  const still = { hero: 2.2, cctv: 4.9, reset: 3.2, ending: 1 };
+  expressions(document.getElementById('expr').getContext('2d'));
+  function drawAll(t, onlyVisible) { jobs.forEach(j => { if (!onlyVisible || j.vis) j.fn(j.ctx, reduce ? (still[j.el.id] ?? 1) : t); }); }
+  drawAll(0.5, false);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { drawAll(reduce ? 0 : performance.now() / 1000, false); expressions(document.getElementById('expr').getContext('2d')); });
+  if (!reduce) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => { const j = jobs.find(k => k.el === e.target); if (j) j.vis = e.isIntersecting; }), { rootMargin: '100px' });
+      jobs.forEach(j => io.observe(j.el));
+    }
+    let last = 0;
+    const loop = now => { if (now - last > 1000 / 30) { last = now; drawAll(now / 1000, true); } requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
