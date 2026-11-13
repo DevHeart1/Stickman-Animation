@@ -8,3 +8,5 @@ Research and production notes for short-form vertical stickman comedy skits.
 - `research/frames/` holds contact sheets (including full 30 fps sheets of hooks and punchlines), stills and spectrograms.
 - `research/data/` holds per-frame metrics (30 fps CSV), per-line audio analysis and shot summaries.
 - `research/tools/` holds the scripts used to produce the analysis.
+
+- **[films/twelve-minutes-ahead/](films/twelve-minutes-ahead/README.md)** is *Twelve Minutes Ahead*, Episode 01. It is an 11-minute sci-fi thriller animated in code with silhouette characters, a blue control room, a fog-layered city and noir memories. It has a synthesised soundtrack and full subtitles. `production/twelve-minutes-ahead/style-bible.html` is the first look-development page.
